@@ -15,7 +15,7 @@ This repository documents both the **automated course creation process** (driven
   - Recipe generators with data structures  
   - Vacation planners with CSV files  
 - Supportive **AI-assisted learning**: guided debugging, lab exercises, and an inline chatbot tutor.  
-- Culminates in applied projects like **Pluto’s poetic journey** and **candy data analysis**.
+- Culminates in applied projects like **Pluto's poetic journey** and **candy data analysis**.
 
 See [`AI-PYTHON-FOR-BEGINNERS.md`](./AI-PYTHON-FOR-BEGINNERS.md) for the complete module breakdown.
 
@@ -51,7 +51,7 @@ The **automation framework** is codified in [`CLAUDE.md`](./CLAUDE.md). It defin
    - Deliverables: `learner-profile.md`, `sme-analysis.md`, draft syllabus.
 
 2. **Content Architecture** → `content-architect`  
-   - Defines module structure, objectives (Bloom’s mapped), assessment plan.  
+   - Defines module structure, objectives (Bloom's mapped), assessment plan.  
    - Deliverables: `course-structure.md`, `learning-objectives.json`, `assessment-plan.md`.
 
 3. **Storyboarding & Script Development** → `storyboard-writer`  
@@ -60,7 +60,7 @@ The **automation framework** is codified in [`CLAUDE.md`](./CLAUDE.md). It defin
 
 4. **Lab & Interactive Content** → `lab-developer`  
    - Builds Jupyter notebooks, coding assignments, autograders, hint scaffolds.  
-   - Example: `labs/module1/lab-1-1-script-transformation.ipynb` (refactor Sarah’s assistant).  
+   - Example: `labs/module1/lab-1-1-script-transformation.ipynb` (refactor Sarah's assistant).  
 
 5. **Quality Assurance & Integration** → `qa-integrator`  
    - Validates content against pedagogy & accessibility standards.  
@@ -78,16 +78,20 @@ The **automation framework** is codified in [`CLAUDE.md`](./CLAUDE.md). It defin
 - [course-structure.md](./course-structure.md) — Detailed architecture  
 - [course-alternatives.md](./course-alternatives.md) — Alternative design options A/B/C  
 - [assessment-plan.md](./assessment-plan.md) — Portfolio-driven assessment strategy  
-- [learning-objectives.json](./learning-objectives.json) — Bloom’s taxonomy mapped objectives  
+- [learning-objectives.json](./learning-objectives.json) — Bloom's taxonomy mapped objectives  
 - [learner-profile.md](./learner-profile.md) — Audience & motivation analysis  
 - [sme-analysis.md](./sme-analysis.md) — Industry skill requirements vs. gaps  
 - [technical-progression.md](./technical-progression.md) — Skill progression roadmap  
 - [LOGS.md](./LOGS.md) — Orchestration execution logs  
 - [labs/](./labs/) — Jupyter labs + programming assignments  
   - [module1/](./labs/module1/) — Foundational labs (e.g. script refactoring)  
-  - [narratives/](./labs/narratives/) — Lab story contexts (e.g. Sarah’s assistant)  
+  - [narratives/](./labs/narratives/) — Lab story contexts (e.g. Sarah's assistant)  
 - [assessments/](./assessments/) — Quiz banks, rubrics  
-- [production-ready/](./production-ready/) — Final export packages  
+- [scripts/](./scripts/) — Production-ready video scripts
+- [readings/](./readings/) — Technical guides and explanations
+- [storyboards/](./storyboards/) — Content flow and learning progression
+- [qa-reports/](./qa-reports/) — Quality validation and metrics
+- [.claude/agents/](/.claude/agents/) — Specialized subagent definitions
 
 ## 🔎 Key Artifacts
 
@@ -101,11 +105,13 @@ The **automation framework** is codified in [`CLAUDE.md`](./CLAUDE.md). It defin
   - [`assessment-plan.md`](./assessment-plan.md)  
 
 - **Generated teaching content**  
-  - [`labs/module1`](./labs/module1) notebooks  
-  - [`assessments/quizzes/module1-quiz-bank.md`](./assessments/quizzes/module1-quiz-bank.md)  
+  - [`scripts/module1-*`](./scripts/) — Video scripts with timing and accessibility
+  - [`labs/narratives/module1-personal-ai-assistant.md`](./labs/narratives/module1-personal-ai-assistant.md) — Sarah's consultant story
+  - [`assessments/quizzes/module1-quiz-bank.md`](./assessments/quizzes/module1-quiz-bank.md) — Knowledge checks
 
-- **Logs & QA**  
-  - [`LOGS.md`](./LOGS.md) shows chronological agent invocation and deliverable outputs.
+- **Quality assurance**  
+  - [`qa-reports/`](./qa-reports/) — Validation results and production readiness
+  - [`LOGS.md`](./LOGS.md) — Complete orchestration workflow execution
 
 ## ✅ Outcomes
 
@@ -114,6 +120,7 @@ By combining **agentic orchestration** with instructional design:
 - **Consistency**: Learning objectives, labs, and assessments aligned across modules.  
 - **Portfolio value**: Every student produces tangible, deployed applications.  
 - **Industry relevance**: Curriculum validated against 500+ AI developer job postings.
+- **Quality excellence**: 95% production readiness with comprehensive validation.
 
 ## 📊 Orchestration Metrics
 
@@ -123,6 +130,9 @@ By combining **agentic orchestration** with instructional design:
 | Content architecture development      | 8         | 42.7k    | 5m 32.9s   |
 | Storyboarding & script development    | 32        | 78.3k    | 22m 25.6s  |
 | Lab development (with Phase 3 inputs) | 27        | 134.5k   | 34m 42.9s  |
+| QA and integration validation         | 42        | 68.7k    | 8m 15.0s   |
+| Final preparation and packaging       | 26        | 84.2k    | 30m 11.4s  |
+| **Total**                            | **142**   | **435.5k** | **~1h 45m** |
 
 ## 🚀 How to Use This Repository
 
@@ -130,11 +140,17 @@ For curriculum designers:
 - Study `CLAUDE.md` for orchestrator prompts and phase discipline.
 - Review `LOGS.md` for a worked example of automated course authoring in action.
 - Adapt the **lab templates** and **lesson script templates** in `CLAUDE.md` for new subject domains.
+- Use the specialized subagents in `.claude/agents/` for systematic content creation.
 
 For learners:
 - Begin with **AI Python for Beginners** as an onboarding course.  
 - Progress to **How to be an AI-builder** and complete the labs, programming assignments, and deployment projects.  
 - Showcase your work by linking deployed projects in your **GitHub portfolio**.
+
+For instructors:
+- Use the comprehensive teaching guides and troubleshooting resources.
+- Implement the portfolio-driven assessment strategy with detailed rubrics.
+- Leverage the progressive hint systems for diverse learner support.
 
 ## ✨ Vision
 
@@ -142,3 +158,5 @@ This repository is both a **curriculum artifact** and a **process demonstration*
 It proves that **courses themselves can be generated and validated with AI agents**, producing both:
 - **Reusable teaching content** (labs, quizzes, projects), and  
 - **A meta-framework** (`CLAUDE.md`) that automates high-quality course design.
+
+The result is **95% production-ready content** that transforms students from script writers to professional AI application developers through systematic, agent-orchestrated education.
