@@ -1,6 +1,6 @@
 # How to be an AI Builder – Agentic Course Production Framework
 
-This repository documents both the **automated course creation process** (driven by agentic orchestration) and the **AI learning pathways** it produced. It contains two interconnected courses:
+This repository documents both the **automated course creation process** (driven by agentic orchestration) and the **AI learning pathways** it produced. It involves two interconnected courses:
 
 1. **AI Python for Beginners** — an entry-level course introducing Python and AI basics.  
 2. **How to be an AI-builder** — a professional track that takes students from writing simple scripts to building and deploying AI applications, created through the orchestrated agentic workflow defined in `CLAUDE.md` and supporting agent files.
