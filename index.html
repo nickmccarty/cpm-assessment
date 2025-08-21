@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Builder Course Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Marked for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #f1f5f9;
+            --accent-color: #06b6d4;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        
+        .bloom-level-1 { color: #ef4444; }
+        .bloom-level-2 { color: #f97316; }
+        .bloom-level-3 { color: #eab308; }
+        .bloom-level-4 { color: #22c55e; }
+        .bloom-level-5 { color: #3b82f6; }
+        .bloom-level-6 { color: #8b5cf6; }
+        
+        .objective-row {
+            border-left: 3px solid #e2e8f0;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .objective-row.bloom-1 { border-left-color: #ef4444; }
+        .objective-row.bloom-2 { border-left-color: #f97316; }
+        .objective-row.bloom-3 { border-left-color: #eab308; }
+        .objective-row.bloom-4 { border-left-color: #22c55e; }
+        .objective-row.bloom-5 { border-left-color: #3b82f6; }
+        .objective-row.bloom-6 { border-left-color: #8b5cf6; }
+        
+        .module-header {
+            background: linear-gradient(90deg, var(--secondary-color) 0%, white 100%);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .icon-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .icon-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+        
+        .modal-content {
+            border-radius: 12px;
+        }
+        
+        .markdown-content {
+            line-height: 1.6;
+        }
+        
+        .markdown-content h1, .markdown-content h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .markdown-content h3 {
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+        }
+        
+        .markdown-content code {
+            background-color: var(--secondary-color);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .markdown-content pre {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        .notes-editor {
+            min-height: 300px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .table th {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #e2e8f0 100%);
+            color: var(--primary-color);
+            font-weight: 600;
+            border: none;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">
+                        <i class="bi bi-robot"></i> AI-Builder Course Dashboard
+                    </h1>
+                    <p class="mb-0 opacity-90">From Scripts to Applications - Course Production Analytics</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button type="button" class="icon-button me-2" data-bs-toggle="modal" data-bs-target="#logsModal">
+                        <i class="bi bi-journal-text"></i> View Logs
+                    </button>
+                    <button type="button" class="icon-button" data-bs-toggle="modal" data-bs-target="#notesModal">
+                        <i class="bi bi-sticky"></i> Course Notes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Overview Stats -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-book display-4 text-primary mb-2"></i>
+                        <h3 class="mb-1">4</h3>
+                        <p class="text-muted mb-0">Modules</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-target display-4 text-success mb-2"></i>
+                        <h3 class="mb-1" id="totalObjectives">20</h3>
+                        <p class="text-muted mb-0">Learning Objectives</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clock display-4 text-warning mb-2"></i>
+                        <h3 class="mb-1">8-10</h3>
+                        <p class="text-muted mb-0">Hours Content</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-trophy display-4 text-info mb-2"></i>
+                        <h3 class="mb-1">95%</h3>
+                        <p class="text-muted mb-0">Production Ready</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloom's Taxonomy Chart -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">
+                            <i class="bi bi-pie-chart"></i> Bloom's Taxonomy Distribution
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="bloomChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">
+                            <i class="bi bi-bar-chart"></i> Learning Objectives by Module
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="moduleChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-4" id="contentTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="objectives-tab" data-bs-toggle="pill" data-bs-target="#objectives" type="button" role="tab">
+                    <i class="bi bi-list-check"></i> Learning Objectives
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="outcomes-tab" data-bs-toggle="pill" data-bs-target="#outcomes" type="button" role="tab">
+                    <i class="bi bi-bullseye"></i> Learning Outcomes
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="progress-tab" data-bs-toggle="pill" data-bs-target="#progress" type="button" role="tab">
+                    <i class="bi bi-graph-up"></i> Module Progress
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="contentTabsContent">
+            <!-- Learning Objectives Tab -->
+            <div class="tab-pane fade show active" id="objectives" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Itemized Learning Objectives by Module</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="objectivesContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Outcomes Tab -->
+            <div class="tab-pane fade" id="outcomes" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Learning Outcomes by Bloom's Taxonomy</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="outcomesContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tab -->
+            <div class="tab-pane fade" id="progress" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h5 class="mb-0">Module Development Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="progressContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logs Modal -->
+    <div class="modal fade" id="logsModal" tabindex="-1" aria-labelledby="logsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logsModalLabel">
+                        <i class="bi bi-journal-text"></i> Course Orchestration Workflow Log
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="logsContent" class="markdown-content">
+                        Loading logs...
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes Modal -->
+    <div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notesModalLabel">
+                        <i class="bi bi-sticky"></i> Course Notes
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Editor</h6>
+                            <textarea id="notesEditor" class="form-control notes-editor" placeholder="Add your course notes here..."></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Preview</h6>
+                            <div id="notesPreview" class="border p-3 rounded markdown-content" style="min-height: 300px; background-color: #f8f9fa;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveNotes">Save Notes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Course data
+        const courseData = {
+            "course_info": {
+                "title": "How to be an AI-builder",
+                "total_duration_hours": "8-10",
+                "modules": 4,
+                "assessment_philosophy": "Portfolio-based with progressive skill building",
+                "career_alignment": "Entry-level AI developer positions"
+            },
+            "bloom_taxonomy_levels": {
+                "1": "Remember",
+                "2": "Understand", 
+                "3": "Apply",
+                "4": "Analyze",
+                "5": "Evaluate",
+                "6": "Create"
+            },
+            "modules": [
+                {
+                    "module_id": "M1",
+                    "title": "LLM Application Foundations",
+                    "duration_hours": 2.5,
+                    "bridge_focus": "Scripts → Applications",
+                    "learning_objectives": [
+                        {
+                            "id": "M1-LO1",
+                            "bloom_level": 4,
+                            "objective": "Analyze the differences between script-based and application-based code organization",
+                            "description": "Students will examine monolithic scripts and identify organizational weaknesses, then propose modular application structures",
+                            "technical_skills": ["Code organization", "Modularity", "Software architecture"]
+                        },
+                        {
+                            "id": "M1-LO2", 
+                            "bloom_level": 6,
+                            "objective": "Create modular Python applications with proper function and class structure",
+                            "description": "Students will build AI applications using object-oriented principles and modular design patterns",
+                            "technical_skills": ["Object-oriented programming", "Module design", "Code organization"]
+                        },
+                        {
+                            "id": "M1-LO3",
+                            "bloom_level": 5,
+                            "objective": "Evaluate code quality using professional development standards",
+                            "description": "Students will assess code quality, implement improvements, and demonstrate understanding of professional coding practices",
+                            "technical_skills": ["Code review", "Documentation", "Professional practices"]
+                        },
+                        {
+                            "id": "M1-LO4",
+                            "bloom_level": 3,
+                            "objective": "Apply error handling and logging in AI applications",
+                            "description": "Students will implement comprehensive error handling strategies and logging systems for robust AI applications",
+                            "technical_skills": ["Error handling", "Logging", "Robustness", "User experience"]
+                        },
+                        {
+                            "id": "M1-LO5",
+                            "bloom_level": 6,
+                            "objective": "Design user interfaces for AI tools using Gradio",
+                            "description": "Students will create intuitive web interfaces that make AI applications accessible to non-technical users",
+                            "technical_skills": ["UI/UX design", "Gradio framework", "Web interfaces"]
+                        }
+                    ]
+                },
+                {
+                    "module_id": "M2",
+                    "title": "Building Robust AI Systems",
+                    "duration_hours": 2.5,
+                    "bridge_focus": "Basic APIs → Robust Systems",
+                    "learning_objectives": [
+                        {
+                            "id": "M2-LO1",
+                            "bloom_level": 3,
+                            "objective": "Implement advanced LLM integration patterns including streaming, batch processing, and multi-model orchestration",
+                            "description": "Students will build sophisticated API integration systems that handle complex real-world scenarios",
+                            "technical_skills": ["Streaming APIs", "Batch processing", "Multi-model systems", "Performance optimization"]
+                        },
+                        {
+                            "id": "M2-LO2",
+                            "bloom_level": 6,
+                            "objective": "Create sophisticated prompting systems with templates and chaining",
+                            "description": "Students will design and implement prompt management systems for consistent and optimizable AI interactions",
+                            "technical_skills": ["Prompt engineering", "Template systems", "A/B testing", "Optimization"]
+                        },
+                        {
+                            "id": "M2-LO3",
+                            "bloom_level": 5,
+                            "objective": "Evaluate and optimize API usage for cost and performance",
+                            "description": "Students will analyze API usage patterns and implement optimization strategies for production applications",
+                            "technical_skills": ["Performance analysis", "Caching", "Rate limiting", "Cost optimization"]
+                        },
+                        {
+                            "id": "M2-LO4",
+                            "bloom_level": 6,
+                            "objective": "Design user experiences that handle AI unpredictability gracefully",
+                            "description": "Students will create interfaces and experiences that manage user expectations and handle AI failures elegantly",
+                            "technical_skills": ["UX design", "Error handling", "User communication", "Expectation management"]
+                        },
+                        {
+                            "id": "M2-LO5",
+                            "bloom_level": 3,
+                            "objective": "Apply authentication and security best practices for AI applications",
+                            "description": "Students will implement security measures appropriate for production AI applications",
+                            "technical_skills": ["Security", "Authentication", "Input validation", "API security"]
+                        }
+                    ]
+                },
+                {
+                    "module_id": "M3",
+                    "title": "Data Management and Persistence",
+                    "duration_hours": 2.5,
+                    "bridge_focus": "Local Files → Scalable Data Systems",
+                    "learning_objectives": [
+                        {
+                            "id": "M3-LO1",
+                            "bloom_level": 6,
+                            "objective": "Design data models and storage strategies for AI applications",
+                            "description": "Students will architect database schemas and storage systems appropriate for AI application requirements",
+                            "technical_skills": ["Database design", "Schema modeling", "Indexing", "Scalability planning"]
+                        },
+                        {
+                            "id": "M3-LO2",
+                            "bloom_level": 3,
+                            "objective": "Implement database integration using SQLite and cloud services",
+                            "description": "Students will build database-backed applications with proper CRUD operations and data integrity",
+                            "technical_skills": ["Database operations", "CRUD implementation", "Transaction management", "Data integrity"]
+                        },
+                        {
+                            "id": "M3-LO3",
+                            "bloom_level": 6,
+                            "objective": "Create data processing pipelines for AI model inputs and outputs",
+                            "description": "Students will build automated systems for processing, validating, and transforming data for AI applications",
+                            "technical_skills": ["Data pipelines", "ETL processes", "Data validation", "Workflow automation"]
+                        },
+                        {
+                            "id": "M3-LO4",
+                            "bloom_level": 4,
+                            "objective": "Analyze data quality and implement validation systems",
+                            "description": "Students will assess data quality issues and build systems to ensure data integrity and reliability",
+                            "technical_skills": ["Data quality analysis", "Validation systems", "Data cleaning", "Monitoring"]
+                        },
+                        {
+                            "id": "M3-LO5",
+                            "bloom_level": 3,
+                            "objective": "Apply data privacy and security principles",
+                            "description": "Students will implement data protection measures appropriate for AI applications handling user data",
+                            "technical_skills": ["Data privacy", "Encryption", "Compliance", "Data governance"]
+                        }
+                    ]
+                },
+                {
+                    "module_id": "M4",
+                    "title": "Deployment and Portfolio",
+                    "duration_hours": 2.5,
+                    "bridge_focus": "Local Development → Public Deployment and Professional Presentation",
+                    "learning_objectives": [
+                        {
+                            "id": "M4-LO1",
+                            "bloom_level": 3,
+                            "objective": "Apply Git workflows for collaborative AI development",
+                            "description": "Students will use version control effectively for AI project development and collaboration",
+                            "technical_skills": ["Git workflows", "Version control", "Branching strategies", "Collaboration"]
+                        },
+                        {
+                            "id": "M4-LO2",
+                            "bloom_level": 6,
+                            "objective": "Create deployment pipelines for web-based AI applications",
+                            "description": "Students will build automated deployment systems for their AI applications across multiple platforms",
+                            "technical_skills": ["Deployment automation", "Environment management", "Platform integration", "DevOps basics"]
+                        },
+                        {
+                            "id": "M4-LO3",
+                            "bloom_level": 5,
+                            "objective": "Evaluate different deployment platforms and select appropriate solutions",
+                            "description": "Students will assess various deployment options and make informed decisions based on application requirements",
+                            "technical_skills": ["Platform evaluation", "Technical decision making", "Cost analysis", "Migration planning"]
+                        },
+                        {
+                            "id": "M4-LO4",
+                            "bloom_level": 6,
+                            "objective": "Design professional portfolio presentations of AI projects",
+                            "description": "Students will create compelling portfolio presentations that effectively communicate their technical capabilities",
+                            "technical_skills": ["Technical writing", "Portfolio development", "Professional presentation", "Communication"]
+                        },
+                        {
+                            "id": "M4-LO5",
+                            "bloom_level": 6,
+                            "objective": "Synthesize course learning into capstone portfolio project",
+                            "description": "Students will integrate all course concepts into an original, comprehensive AI application project",
+                            "technical_skills": ["System integration", "Original development", "Professional practices", "Project management"]
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Calculate Bloom's Taxonomy distribution
+        function calculateBloomDistribution() {
+            const bloomCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+            
+            courseData.modules.forEach(module => {
+                module.learning_objectives.forEach(obj => {
+                    bloomCounts[obj.bloom_level]++;
+                });
+            });
+            
+            return bloomCounts;
+        }
+
+        // Calculate module objective counts
+        function calculateModuleObjectives() {
+            return courseData.modules.map(module => ({
+                module: module.module_id,
+                title: module.title,
+                count: module.learning_objectives.length,
+                duration: module.duration_hours
+            }));
+        }
+
+        // Initialize Bloom's Taxonomy Chart
+        function initBloomChart() {
+            const ctx = document.getElementById('bloomChart').getContext('2d');
+            const bloomDistribution = calculateBloomDistribution();
+            
+            const data = {
+                labels: [
+                    'Remember (1)',
+                    'Understand (2)',
+                    'Apply (3)',
+                    'Analyze (4)',
+                    'Evaluate (5)',
+                    'Create (6)'
+                ],
+                datasets: [{
+                    data: Object.values(bloomDistribution),
+                    backgroundColor: [
+                        '#ef4444',
+                        '#f97316',
+                        '#eab308',
+                        '#22c55e',
+                        '#3b82f6',
+                        '#8b5cf6'
+                    ],
+                    borderWidth: 0
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} objectives (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize Module Chart
+        function initModuleChart() {
+            const ctx = document.getElementById('moduleChart').getContext('2d');
+            const moduleData = calculateModuleObjectives();
+            
+            const data = {
+                labels: moduleData.map(m => m.module),
+                datasets: [{
+                    label: 'Learning Objectives',
+                    data: moduleData.map(m => m.count),
+                    backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                    borderColor: 'rgba(37, 99, 235, 1)',
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const index = context[0].dataIndex;
+                                    return moduleData[index].title;
+                                },
+                                label: function(context) {
+                                    const index = context.dataIndex;
+                                    const module = moduleData[index];
+                                    return `${context.parsed.y} objectives • ${module.duration}h duration`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Generate Learning Objectives Content
+        function generateObjectivesContent() {
+            const container = document.getElementById('objectivesContent');
+            let html = '';
+
+            courseData.modules.forEach(module => {
+                html += `
+                    <div class="module-header">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h4 class="mb-1">${module.title}</h4>
+                                <p class="text-muted mb-0">
+                                    <i class="bi bi-arrow-right"></i> Bridge Focus: ${module.bridge_focus}
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <span class="badge bg-primary">${module.learning_objectives.length} objectives</span>
+                                <span class="badge bg-info">${module.duration_hours}h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="10%">ID</th>
+                                    <th width="10%">Bloom</th>
+                                    <th width="50%">Objective</th>
+                                    <th width="30%">Technical Skills</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                module.learning_objectives.forEach(obj => {
+                    const bloomLevel = courseData.bloom_taxonomy_levels[obj.bloom_level];
+                    html += `
+                        <tr class="objective-row bloom-${obj.bloom_level}">
+                            <td><code>${obj.id}</code></td>
+                            <td>
+                                <span class="badge bloom-level-${obj.bloom_level}">
+                                    ${obj.bloom_level}: ${bloomLevel}
+                                </span>
+                            </td>
+                            <td>
+                                <strong>${obj.objective}</strong>
+                                <br><small class="text-muted">${obj.description}</small>
+                            </td>
+                            <td>
+                                ${obj.technical_skills.map(skill => 
+                                    `<span class="badge bg-secondary me-1">${skill}</span>`
+                                ).join('')}
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr class="my-4">
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Generate Learning Outcomes Content
+        function generateOutcomesContent() {
+            const container = document.getElementById('outcomesContent');
+            const bloomLevels = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] };
+
+            // Group objectives by Bloom level
+            courseData.modules.forEach(module => {
+                module.learning_objectives.forEach(obj => {
+                    bloomLevels[obj.bloom_level].push({
+                        ...obj,
+                        module_title: module.title,
+                        module_id: module.module_id
+                    });
+                });
+            });
+
+            let html = '';
+
+            Object.keys(bloomLevels).forEach(level => {
+                const levelName = courseData.bloom_taxonomy_levels[level];
+                const objectives = bloomLevels[level];
+                
+                if (objectives.length > 0) {
+                    html += `
+                        <div class="card mb-4 border-0" style="border-left: 4px solid var(--bloom-level-${level}) !important;">
+                            <div class="card-header" style="background: linear-gradient(90deg, var(--bloom-level-${level})20 0%, transparent 100%);">
+                                <h5 class="mb-0 bloom-level-${level}">
+                                    <i class="bi bi-chevron-right"></i> Level ${level}: ${levelName}
+                                    <span class="badge bg-light text-dark ms-2">${objectives.length} objectives</span>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th width="15%">Module</th>
+                                                <th width="60%">Learning Outcome</th>
+                                                <th width="25%">Technical Skills</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                    `;
+
+                    objectives.forEach(obj => {
+                        html += `
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">${obj.module_id}</span>
+                                    <br><small class="text-muted">${obj.module_title}</small>
+                                </td>
+                                <td>
+                                    <strong>${obj.objective}</strong>
+                                    <br><small class="text-muted">${obj.description}</small>
+                                </td>
+                                <td>
+                                    ${obj.technical_skills.map(skill => 
+                                        `<span class="badge bg-light text-dark me-1 mb-1" style="font-size: 0.75em;">${skill}</span>`
+                                    ).join('')}
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Generate Progress Content
+        function generateProgressContent() {
+            const container = document.getElementById('progressContent');
+            const moduleProgress = [
+                { module: 'M1', title: 'LLM Application Foundations', progress: 100, status: 'complete' },
+                { module: 'M2', title: 'Building Robust AI Systems', progress: 75, status: 'in-progress' },
+                { module: 'M3', title: 'Data Management and Persistence', progress: 25, status: 'planned' },
+                { module: 'M4', title: 'Deployment and Portfolio', progress: 0, status: 'planned' }
+            ];
+
+            let html = '';
+
+            moduleProgress.forEach(module => {
+                const statusColor = module.status === 'complete' ? 'success' : 
+                                   module.status === 'in-progress' ? 'warning' : 'secondary';
+                
+                const statusIcon = module.status === 'complete' ? 'check-circle-fill' : 
+                                  module.status === 'in-progress' ? 'clock' : 'circle';
+
+                html += `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-1">
+                                        <i class="bi bi-${statusIcon} text-${statusColor}"></i>
+                                        ${module.title}
+                                    </h5>
+                                    <p class="text-muted mb-2">${module.module}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-${statusColor}" 
+                                             style="width: ${module.progress}%" 
+                                             role="progressbar" 
+                                             aria-valuenow="${module.progress}" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-end">
+                                    <span class="badge bg-${statusColor}">${module.progress}%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Load logs content
+        async function loadLogs() {
+            try {
+                const response = await fetch('LOGS.md');
+                const logsText = await response.text();
+                document.getElementById('logsContent').innerHTML = marked.parse(logsText);
+            } catch (error) {
+                document.getElementById('logsContent').innerHTML = '<p class="text-muted">Could not load logs content.</p>';
+            }
+        }
+
+        // Initialize notes functionality
+        function initNotes() {
+            const notesEditor = document.getElementById('notesEditor');
+            const notesPreview = document.getElementById('notesPreview');
+            const saveNotesBtn = document.getElementById('saveNotes');
+
+            // Load existing notes from localStorage
+            const savedNotes = localStorage.getItem('courseNotes');
+            if (savedNotes) {
+                notesEditor.value = savedNotes;
+                notesPreview.innerHTML = marked.parse(savedNotes);
+            } else {
+                notesEditor.value = '# Course Notes\n\n## Module 1: LLM Application Foundations\n- Key insights:\n- Action items:\n\n## Module 2: Building Robust AI Systems\n- Key insights:\n- Action items:\n\n## Module 3: Data Management and Persistence\n- Key insights:\n- Action items:\n\n## Module 4: Deployment and Portfolio\n- Key insights:\n- Action items:\n\n---\n*Last updated: ' + new Date().toLocaleDateString() + '*';
+                notesPreview.innerHTML = marked.parse(notesEditor.value);
+            }
+
+            // Real-time preview update
+            notesEditor.addEventListener('input', function() {
+                try {
+                    notesPreview.innerHTML = marked.parse(this.value);
+                } catch (error) {
+                    notesPreview.innerHTML = '<p class="text-danger">Error parsing markdown</p>';
+                }
+            });
+
+            // Save notes
+            saveNotesBtn.addEventListener('click', function() {
+                localStorage.setItem('courseNotes', notesEditor.value);
+                
+                // Show success feedback
+                const originalText = this.textContent;
+                this.textContent = 'Saved!';
+                this.classList.add('btn-success');
+                this.classList.remove('btn-primary');
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.classList.remove('btn-success');
+                    this.classList.add('btn-primary');
+                }, 1500);
+            });
+        }
+
+        // Update total objectives count
+        function updateTotalObjectives() {
+            const total = courseData.modules.reduce((sum, module) => sum + module.learning_objectives.length, 0);
+            document.getElementById('totalObjectives').textContent = total;
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTotalObjectives();
+            initBloomChart();
+            initModuleChart();
+            generateObjectivesContent();
+            generateOutcomesContent();
+            generateProgressContent();
+            initNotes();
+            
+            // Load logs when modal is opened
+            document.getElementById('logsModal').addEventListener('shown.bs.modal', loadLogs);
+        });
+    </script>
+</body>
+</html>

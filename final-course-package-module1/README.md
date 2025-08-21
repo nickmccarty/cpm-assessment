@@ -271,13 +271,17 @@ stakeholder-communication.md         # Launch coordination and expectations
 
 ## Contact and Support Information
 
-### Production Team Contact
+### Production Team Contacts
+- **Technical Issues**: technical-team@ai-builder.com
+- **Content Questions**: content-team@ai-builder.com  
+- **Accessibility Support**: accessibility@ai-builder.com
+- **Quality Assurance**: qa-team@ai-builder.com
 
-nick@upksilled.consulting
-
-- **Technical Issues**
-- **Content Questions**
-- **Accessibility Support**
+### Emergency Procedures
+- **Production Issues**: 24/7 technical support hotline
+- **Critical Bug Reports**: Immediate escalation procedures
+- **Security Incidents**: Rapid response protocols
+- **Student Support**: Comprehensive help desk procedures
 
 ---
 

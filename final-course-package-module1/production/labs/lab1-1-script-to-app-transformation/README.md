@@ -53,11 +53,14 @@ Document the transformation and prepare portfolio-quality presentation.
 - [ ] Documentation enables others to understand and use the code
 
 ## Files Included
-- `notebook.ipynb` - Main interactive lab content
+- `README.md` - This lab guide and instructions
+- `requirements.txt` - Python package dependencies  
+- `notebook.ipynb` - Main interactive lab content with step-by-step transformation
 - `starter_code/` - Sarah's original problematic script
-- `solution_examples/` - Reference implementations for guidance
-- `tests/` - Validation tests for refactored code
-- `hints/` - Progressive disclosure support system
+  - `sarahs_chaotic_script.py` - The monolithic script to refactor
+- `solution_examples/` - Reference implementations for guidance (use after attempting)
+- `tests/` - Validation tests for refactored code with professional testing patterns
+- `hints/` - Progressive disclosure support system with three levels of help
 
 ## Environment Setup
 ```bash
