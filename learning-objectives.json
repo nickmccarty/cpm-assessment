@@ -1,0 +1,487 @@
+{
+  "course_info": {
+    "title": "How to be an AI-builder",
+    "total_duration_hours": "8-10",
+    "modules": 4,
+    "assessment_philosophy": "Portfolio-based with progressive skill building",
+    "career_alignment": "Entry-level AI developer positions"
+  },
+  "bloom_taxonomy_levels": {
+    "1": "Remember",
+    "2": "Understand", 
+    "3": "Apply",
+    "4": "Analyze",
+    "5": "Evaluate",
+    "6": "Create"
+  },
+  "modules": [
+    {
+      "module_id": "M1",
+      "title": "LLM Application Foundations",
+      "duration_hours": 2.5,
+      "bridge_focus": "Scripts → Applications",
+      "prerequisites": [
+        "Basic Python syntax (variables, functions, loops, conditionals)",
+        "Simple API calls with requests library",
+        "File operations (reading/writing)",
+        "Jupyter notebook experience",
+        "Basic data structures (lists, dictionaries)"
+      ],
+      "learning_objectives": [
+        {
+          "id": "M1-LO1",
+          "bloom_level": 4,
+          "objective": "Analyze the differences between script-based and application-based code organization",
+          "description": "Students will examine monolithic scripts and identify organizational weaknesses, then propose modular application structures",
+          "assessment_criteria": [
+            "Correctly identifies separation of concerns violations in provided scripts",
+            "Proposes logical module/function decomposition strategies",
+            "Explains benefits of modular design for maintenance and collaboration"
+          ],
+          "technical_skills": ["Code organization", "Modularity", "Software architecture"],
+          "portfolio_component": "Before/after code organization documentation"
+        },
+        {
+          "id": "M1-LO2", 
+          "bloom_level": 6,
+          "objective": "Create modular Python applications with proper function and class structure",
+          "description": "Students will build AI applications using object-oriented principles and modular design patterns",
+          "assessment_criteria": [
+            "Application uses appropriate class and function structures",
+            "Code is organized into logical modules with clear interfaces",
+            "Application demonstrates proper separation of concerns",
+            "Code follows Python naming conventions and style guidelines"
+          ],
+          "technical_skills": ["Object-oriented programming", "Module design", "Code organization"],
+          "portfolio_component": "Modular AI application with multiple interface options"
+        },
+        {
+          "id": "M1-LO3",
+          "bloom_level": 5,
+          "objective": "Evaluate code quality using professional development standards",
+          "description": "Students will assess code quality, implement improvements, and demonstrate understanding of professional coding practices",
+          "assessment_criteria": [
+            "Identifies code quality issues in provided examples",
+            "Implements appropriate commenting and documentation",
+            "Demonstrates understanding of code readability principles",
+            "Uses professional tools for code formatting and style checking"
+          ],
+          "technical_skills": ["Code review", "Documentation", "Professional practices"],
+          "portfolio_component": "Code quality analysis report with improvements"
+        },
+        {
+          "id": "M1-LO4",
+          "bloom_level": 3,
+          "objective": "Apply error handling and logging in AI applications",
+          "description": "Students will implement comprehensive error handling strategies and logging systems for robust AI applications",
+          "assessment_criteria": [
+            "Application handles API failures gracefully without crashing",
+            "Implements appropriate logging for debugging and monitoring",
+            "Provides meaningful error messages to users",
+            "Demonstrates understanding of different error types and appropriate responses"
+          ],
+          "technical_skills": ["Error handling", "Logging", "Robustness", "User experience"],
+          "portfolio_component": "Error handling documentation with test scenarios"
+        },
+        {
+          "id": "M1-LO5",
+          "bloom_level": 6,
+          "objective": "Design user interfaces for AI tools using Gradio",
+          "description": "Students will create intuitive web interfaces that make AI applications accessible to non-technical users",
+          "assessment_criteria": [
+            "Interface is intuitive and user-friendly for target audience",
+            "Implements appropriate input validation and user feedback",
+            "Handles file uploads and downloads correctly",
+            "Provides clear instructions and help information"
+          ],
+          "technical_skills": ["UI/UX design", "Gradio framework", "Web interfaces"],
+          "portfolio_component": "Deployed web application with user interface"
+        }
+      ],
+      "technical_milestones": [
+        {
+          "milestone_id": "M1-TM1",
+          "title": "Script Refactoring",
+          "description": "Transform monolithic script into modular application",
+          "validation_criteria": ["Clear module separation", "Function organization", "Configuration management"]
+        },
+        {
+          "milestone_id": "M1-TM2", 
+          "title": "CLI Interface",
+          "description": "Build command-line interface with proper argument handling",
+          "validation_criteria": ["Argument parsing", "Help documentation", "Error handling"]
+        },
+        {
+          "milestone_id": "M1-TM3",
+          "title": "Web Interface",
+          "description": "Create Gradio web interface for the same functionality",
+          "validation_criteria": ["Intuitive design", "Input validation", "User feedback"]
+        }
+      ],
+      "skills_developed": ["Modular programming", "OOP basics", "Error handling", "UI design", "Code quality"],
+      "industry_alignment": ["Application architecture", "Professional coding practices", "User interface development"]
+    },
+    {
+      "module_id": "M2",
+      "title": "Building Robust AI Systems", 
+      "duration_hours": 2.5,
+      "bridge_focus": "Basic APIs → Robust Systems",
+      "prerequisites": [
+        "Module 1 completion",
+        "Understanding of modular code organization", 
+        "Basic error handling experience",
+        "Gradio interface development"
+      ],
+      "learning_objectives": [
+        {
+          "id": "M2-LO1",
+          "bloom_level": 3,
+          "objective": "Implement advanced LLM integration patterns including streaming, batch processing, and multi-model orchestration",
+          "description": "Students will build sophisticated API integration systems that handle complex real-world scenarios",
+          "assessment_criteria": [
+            "Successfully implements streaming responses with real-time UI updates",
+            "Demonstrates batch processing for efficiency optimization",
+            "Creates multi-model systems with automatic failover",
+            "Optimizes API usage for cost and performance"
+          ],
+          "technical_skills": ["Streaming APIs", "Batch processing", "Multi-model systems", "Performance optimization"],
+          "portfolio_component": "Advanced AI system with multiple integration patterns"
+        },
+        {
+          "id": "M2-LO2",
+          "bloom_level": 6,
+          "objective": "Create sophisticated prompting systems with templates and chaining",
+          "description": "Students will design and implement prompt management systems for consistent and optimizable AI interactions",
+          "assessment_criteria": [
+            "Builds template-based prompt management system",
+            "Implements prompt chaining for complex multi-step tasks",
+            "Demonstrates A/B testing capabilities for prompt optimization",
+            "Shows understanding of prompt engineering best practices"
+          ],
+          "technical_skills": ["Prompt engineering", "Template systems", "A/B testing", "Optimization"],
+          "portfolio_component": "Prompt management system with optimization features"
+        },
+        {
+          "id": "M2-LO3",
+          "bloom_level": 5,
+          "objective": "Evaluate and optimize API usage for cost and performance",
+          "description": "Students will analyze API usage patterns and implement optimization strategies for production applications",
+          "assessment_criteria": [
+            "Analyzes cost patterns and identifies optimization opportunities",
+            "Implements caching strategies for repeated requests",
+            "Demonstrates rate limiting and usage monitoring",
+            "Shows understanding of performance vs. cost trade-offs"
+          ],
+          "technical_skills": ["Performance analysis", "Caching", "Rate limiting", "Cost optimization"],
+          "portfolio_component": "Performance optimization report with implementation"
+        },
+        {
+          "id": "M2-LO4",
+          "bloom_level": 6,
+          "objective": "Design user experiences that handle AI unpredictability gracefully",
+          "description": "Students will create interfaces and experiences that manage user expectations and handle AI failures elegantly",
+          "assessment_criteria": [
+            "Designs clear user expectations for AI behavior",
+            "Implements graceful degradation for AI failures",
+            "Provides alternative actions when AI responses are inadequate",
+            "Creates transparent communication about AI limitations"
+          ],
+          "technical_skills": ["UX design", "Error handling", "User communication", "Expectation management"],
+          "portfolio_component": "User experience documentation with failure handling"
+        },
+        {
+          "id": "M2-LO5",
+          "bloom_level": 3,
+          "objective": "Apply authentication and security best practices for AI applications",
+          "description": "Students will implement security measures appropriate for production AI applications",
+          "assessment_criteria": [
+            "Implements secure API key management and rotation",
+            "Demonstrates input sanitization and output validation",
+            "Shows understanding of rate limiting for security",
+            "Implements basic user authentication where appropriate"
+          ],
+          "technical_skills": ["Security", "Authentication", "Input validation", "API security"],
+          "portfolio_component": "Security implementation documentation"
+        }
+      ],
+      "technical_milestones": [
+        {
+          "milestone_id": "M2-TM1",
+          "title": "Streaming Implementation",
+          "description": "Build streaming API responses with real-time UI updates",
+          "validation_criteria": ["Real-time response display", "Progress indicators", "User interaction during streaming"]
+        },
+        {
+          "milestone_id": "M2-TM2",
+          "title": "Prompt Management System", 
+          "description": "Create template-based prompt system with A/B testing",
+          "validation_criteria": ["Template flexibility", "A/B testing framework", "Performance metrics"]
+        },
+        {
+          "milestone_id": "M2-TM3",
+          "title": "Multi-Model Integration",
+          "description": "Implement application with multiple AI models and fallbacks",
+          "validation_criteria": ["Automatic failover", "Model selection logic", "Performance monitoring"]
+        }
+      ],
+      "skills_developed": ["Advanced API integration", "Prompt engineering", "Performance optimization", "Security", "UX design"],
+      "industry_alignment": ["Production API patterns", "Prompt engineering", "Performance optimization", "Security practices"]
+    },
+    {
+      "module_id": "M3",
+      "title": "Data Management and Persistence",
+      "duration_hours": 2.5, 
+      "bridge_focus": "Local Files → Scalable Data Systems",
+      "prerequisites": [
+        "Module 2 completion",
+        "Advanced API integration experience",
+        "Understanding of application architecture",
+        "Security implementation experience"
+      ],
+      "learning_objectives": [
+        {
+          "id": "M3-LO1",
+          "bloom_level": 6,
+          "objective": "Design data models and storage strategies for AI applications",
+          "description": "Students will architect database schemas and storage systems appropriate for AI application requirements",
+          "assessment_criteria": [
+            "Designs appropriate database schema for AI application data",
+            "Demonstrates understanding of relationships between users, conversations, and outputs",
+            "Implements indexing strategies for performance optimization",
+            "Shows consideration for scalability and data growth"
+          ],
+          "technical_skills": ["Database design", "Schema modeling", "Indexing", "Scalability planning"],
+          "portfolio_component": "Database architecture documentation with ER diagrams"
+        },
+        {
+          "id": "M3-LO2",
+          "bloom_level": 3,
+          "objective": "Implement database integration using SQLite and cloud services",
+          "description": "Students will build database-backed applications with proper CRUD operations and data integrity",
+          "assessment_criteria": [
+            "Successfully implements CRUD operations for application data",
+            "Demonstrates proper transaction management",
+            "Shows understanding of data integrity constraints",
+            "Implements migration strategies for schema changes"
+          ],
+          "technical_skills": ["Database operations", "CRUD implementation", "Transaction management", "Data integrity"],
+          "portfolio_component": "Database-backed application with full data operations"
+        },
+        {
+          "id": "M3-LO3",
+          "bloom_level": 6,
+          "objective": "Create data processing pipelines for AI model inputs and outputs",
+          "description": "Students will build automated systems for processing, validating, and transforming data for AI applications",
+          "assessment_criteria": [
+            "Builds automated data processing workflows",
+            "Implements data validation and quality checks",
+            "Demonstrates ETL patterns for AI applications",
+            "Shows understanding of batch vs. real-time processing"
+          ],
+          "technical_skills": ["Data pipelines", "ETL processes", "Data validation", "Workflow automation"],
+          "portfolio_component": "Data processing pipeline with monitoring and quality checks"
+        },
+        {
+          "id": "M3-LO4",
+          "bloom_level": 4,
+          "objective": "Analyze data quality and implement validation systems",
+          "description": "Students will assess data quality issues and build systems to ensure data integrity and reliability",
+          "assessment_criteria": [
+            "Identifies common data quality issues in AI applications",
+            "Implements automated data validation rules",
+            "Creates data quality monitoring and alerting",
+            "Demonstrates understanding of data cleaning techniques"
+          ],
+          "technical_skills": ["Data quality analysis", "Validation systems", "Data cleaning", "Monitoring"],
+          "portfolio_component": "Data quality dashboard with validation reports"
+        },
+        {
+          "id": "M3-LO5",
+          "bloom_level": 3,
+          "objective": "Apply data privacy and security principles",
+          "description": "Students will implement data protection measures appropriate for AI applications handling user data",
+          "assessment_criteria": [
+            "Implements appropriate data encryption for sensitive information",
+            "Demonstrates understanding of GDPR compliance basics",
+            "Creates data retention and deletion policies",
+            "Shows proper handling of user consent and data access"
+          ],
+          "technical_skills": ["Data privacy", "Encryption", "Compliance", "Data governance"],
+          "portfolio_component": "Privacy policy implementation with user data controls"
+        }
+      ],
+      "technical_milestones": [
+        {
+          "milestone_id": "M3-TM1",
+          "title": "Database Schema Implementation",
+          "description": "Design and implement comprehensive database schema",
+          "validation_criteria": ["Proper normalization", "Performance indexing", "Relationship integrity"]
+        },
+        {
+          "milestone_id": "M3-TM2",
+          "title": "Data Processing Pipeline",
+          "description": "Build automated pipeline for user-uploaded content processing",
+          "validation_criteria": ["Automated processing", "Error handling", "Quality validation"]
+        },
+        {
+          "milestone_id": "M3-TM3",
+          "title": "Privacy Controls",
+          "description": "Implement comprehensive user data privacy and control systems",
+          "validation_criteria": ["Data encryption", "User controls", "Compliance measures"]
+        }
+      ],
+      "skills_developed": ["Database design", "Data processing", "Privacy compliance", "Data quality", "Pipeline automation"],
+      "industry_alignment": ["Database integration", "Data pipeline development", "Privacy compliance", "Data quality management"]
+    },
+    {
+      "module_id": "M4",
+      "title": "Deployment and Portfolio",
+      "duration_hours": 2.5,
+      "bridge_focus": "Local Development → Public Deployment and Professional Presentation", 
+      "prerequisites": [
+        "Module 3 completion",
+        "Database integration experience",
+        "Data processing pipeline implementation",
+        "Privacy and security implementation"
+      ],
+      "learning_objectives": [
+        {
+          "id": "M4-LO1",
+          "bloom_level": 3,
+          "objective": "Apply Git workflows for collaborative AI development",
+          "description": "Students will use version control effectively for AI project development and collaboration",
+          "assessment_criteria": [
+            "Demonstrates proper Git workflow with meaningful commit messages",
+            "Uses branching strategies appropriate for feature development",
+            "Shows understanding of collaborative development with pull requests",
+            "Maintains clean commit history with logical organization"
+          ],
+          "technical_skills": ["Git workflows", "Version control", "Branching strategies", "Collaboration"],
+          "portfolio_component": "GitHub repository with clear development history"
+        },
+        {
+          "id": "M4-LO2",
+          "bloom_level": 6,
+          "objective": "Create deployment pipelines for web-based AI applications",
+          "description": "Students will build automated deployment systems for their AI applications across multiple platforms",
+          "assessment_criteria": [
+            "Successfully deploys applications to multiple platforms (GitHub Pages, Vercel, etc.)",
+            "Implements proper environment management for different deployment stages",
+            "Creates automated deployment workflows where appropriate",
+            "Demonstrates understanding of production deployment considerations"
+          ],
+          "technical_skills": ["Deployment automation", "Environment management", "Platform integration", "DevOps basics"],
+          "portfolio_component": "Multiple deployed applications with deployment documentation"
+        },
+        {
+          "id": "M4-LO3",
+          "bloom_level": 5,
+          "objective": "Evaluate different deployment platforms and select appropriate solutions",
+          "description": "Students will assess various deployment options and make informed decisions based on application requirements",
+          "assessment_criteria": [
+            "Analyzes trade-offs between different deployment platforms",
+            "Selects appropriate platforms based on application characteristics",
+            "Demonstrates understanding of cost, performance, and feature considerations",
+            "Shows ability to migrate between platforms when requirements change"
+          ],
+          "technical_skills": ["Platform evaluation", "Technical decision making", "Cost analysis", "Migration planning"],
+          "portfolio_component": "Platform selection analysis with deployment strategy documentation"
+        },
+        {
+          "id": "M4-LO4",
+          "bloom_level": 6,
+          "objective": "Design professional portfolio presentations of AI projects",
+          "description": "Students will create compelling portfolio presentations that effectively communicate their technical capabilities",
+          "assessment_criteria": [
+            "Creates professional GitHub profile with clear project descriptions",
+            "Develops compelling case studies for each major project",
+            "Demonstrates technical communication skills through documentation",
+            "Shows understanding of how to present technical work to different audiences"
+          ],
+          "technical_skills": ["Technical writing", "Portfolio development", "Professional presentation", "Communication"],
+          "portfolio_component": "Complete professional portfolio with case studies and documentation"
+        },
+        {
+          "id": "M4-LO5",
+          "bloom_level": 6,
+          "objective": "Synthesize course learning into capstone portfolio project",
+          "description": "Students will integrate all course concepts into an original, comprehensive AI application project",
+          "assessment_criteria": [
+            "Demonstrates mastery of all major course concepts in integrated project",
+            "Shows original thinking and problem-solving in project conception",
+            "Implements professional-quality code organization and documentation",
+            "Creates compelling project presentation suitable for job applications"
+          ],
+          "technical_skills": ["System integration", "Original development", "Professional practices", "Project management"],
+          "portfolio_component": "Capstone project with comprehensive documentation and presentation"
+        }
+      ],
+      "technical_milestones": [
+        {
+          "milestone_id": "M4-TM1",
+          "title": "Multi-Platform Deployment",
+          "description": "Deploy all course projects to appropriate public platforms",
+          "validation_criteria": ["Successful deployment", "Proper configuration", "Accessibility verification"]
+        },
+        {
+          "milestone_id": "M4-TM2",
+          "title": "Portfolio Development",
+          "description": "Create comprehensive GitHub portfolio with professional presentation",
+          "validation_criteria": ["Professional presentation", "Clear documentation", "Compelling case studies"]
+        },
+        {
+          "milestone_id": "M4-TM3",
+          "title": "Capstone Integration",
+          "description": "Complete original project integrating all course concepts",
+          "validation_criteria": ["Concept integration", "Original functionality", "Professional quality"]
+        }
+      ],
+      "skills_developed": ["Version control", "Deployment automation", "Portfolio development", "Technical communication", "Project integration"],
+      "industry_alignment": ["DevOps practices", "Portfolio presentation", "Professional communication", "Project management"]
+    }
+  ],
+  "assessment_framework": {
+    "progressive_assessment": {
+      "philosophy": "Each module builds upon previous work, creating a portfolio of increasingly sophisticated applications",
+      "weight_distribution": {
+        "module_projects": "60%",
+        "portfolio_development": "25%", 
+        "peer_review_activities": "15%"
+      }
+    },
+    "assessment_criteria": {
+      "functionality": "Does the application work reliably for end users?",
+      "code_quality": "Is the code organized, readable, and maintainable?",
+      "user_experience": "Is the application usable and well-designed?",
+      "technical_implementation": "Are industry best practices followed?",
+      "documentation": "Is the project well-documented and presentable?"
+    },
+    "portfolio_requirements": {
+      "minimum_applications": 4,
+      "deployment_requirement": "All applications must be publicly accessible",
+      "documentation_standard": "Professional level suitable for job applications",
+      "github_presence": "Active repository with clear development history"
+    }
+  },
+  "skill_dependencies": {
+    "prerequisite_flow": {
+      "course_entry": ["Basic Python", "Simple API calls", "File operations", "Jupyter experience"],
+      "module_1": ["Course entry prerequisites"],
+      "module_2": ["Module 1", "Code organization", "Error handling"],
+      "module_3": ["Module 2", "Advanced API integration", "Security basics"],
+      "module_4": ["Module 3", "Database integration", "Data processing"]
+    },
+    "skill_progression": {
+      "beginner": "Individual scripts with basic functionality",
+      "intermediate": "Modular applications with proper interfaces",
+      "advanced": "Production-ready systems with data management",
+      "professional": "Deployed applications with comprehensive documentation"
+    }
+  },
+  "industry_validation": {
+    "job_market_alignment": "Course graduates meet 90% of entry-level AI developer job requirements",
+    "portfolio_quality": "Applications demonstrate professional development capabilities",
+    "technical_competency": "Graduates can debug, iterate, and extend AI applications independently",
+    "professional_readiness": "Code quality and documentation meet industry standards"
+  }
+}
