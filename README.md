@@ -72,6 +72,7 @@ The **automation framework** is codified in [`CLAUDE.md`](./CLAUDE.md). It defin
 
 ## 📂 Repository Organization
 
+- [EXPECTATIONS.md](./EXPECTATIONS.md) — Original CPM assessment requirements and project scope
 - [AI-PYTHON-FOR-BEGINNERS.md](./AI-PYTHON-FOR-BEGINNERS.md) — Introductory course curriculum  
 - [CLAUDE.md](./CLAUDE.md) — Orchestration framework  
 - [course-syllabus-v1.md](./course-syllabus-v1.md) — Initial syllabus draft  
